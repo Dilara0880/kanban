@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="{% static 'css/style.css' %}"></script>
+    <head>
+        <meta charset="utf-8" />
+        <title>Home page</title>
+    </head>
+    <body>
+        <h3>{{ board.title }}</h3>
+        {% for column in columns %}
+            <ul class="hr">
+            <li>{{ column.title }}
+                {% for task_set in tasks %}
+                    {% for task in task_set %}
+                        {% if task.column_id == column.id %}
+                        <ol class="task">
+                        <li>{{ task.title }}</li>
+                        </ol>
+                        {% endif %}
+                    {% endfor %}
+                 {% endfor %}
+            </li>
+            </ul>
+
+        {% endfor %}
+    </body>
