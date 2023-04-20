@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <meta charset="utf-8" />
+    <title>Edit a task</title>
+</head>
+<body>
+<div class="edit-container">
+        <form class="form-edit" action="{% url 'edit_task' board_id task_id %}" method="post">
+            {% csrf_token %}
+                <h3>Edit a task</h3>
+                 <label for="title"></label>
+                  <input type="text" name="title" required value="{{ task.title }}"><br><br>
+
+                  <label for="description"></label>
+                    <textarea name="description" required placeholder="{{ task.description }}"></textarea><br><br>
+
+                    <label for="deadline"></label>
+                  <input type="datetime-local" name="deadline" value="{{ task.deadline }}" required><br><br>
+
+                    <select name="priority" required>
+                    <option value="">{{ task.priority }}</option>
+                    {% for priority_choice in priority_choices %}
+                    <option value="{{ priority_choice }}">{{ priority_choice }}</option>
+                    {% endfor %}
+                  </select>
+
+                  <select name="column" required>
+                    <option value="">{{ task_column.title }}</option>
+                    {% for column in columns %}
+                    <option value="{{ column.id }}">{{ column.title }}</option>
+                    {% endfor %}
+                  </select><br><br>
+                <div id="edit-btn">
+                <button type="submit">OK</button>
+                </div>
+        </form>
+</div>
+</body>
