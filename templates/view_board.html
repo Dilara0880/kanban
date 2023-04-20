@@ -4,24 +4,32 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
         <meta charset="utf-8" />
-        <title>Home page</title>
+        <title>{{ board.title }}</title>
     </head>
     <body>
         <h3>{{ board.title }}</h3>
+        <a href="{% url 'create_task' board.id %}">Create a new task</a>
+
+        <div class="col-section">
         {% for column in columns %}
-            <ul>
+            <div class="col-wrapper">
+            <ul class="container">
             <li class="hr">{{ column.title }}
-                {% for task_set in tasks %}
-                    {% for task in task_set %}
-                        {% if task.column_id == column.id %}
-                        <ul class="task">
-                        <li>{{ task.title }}</li>
-                        </ul>
-                        {% endif %}
-                    {% endfor %}
-                 {% endfor %}
+                   <div class="task-wrapper">
+                       {% for task_set in tasks %}
+                           {% for task in task_set %}
+                               {% if task.column_id == column.id %}
+                                <div class="task">
+                                <a class="task-title" href="{% url 'edit_task' board.id task.id  %}">{{ task.title }}</a>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                  </div>
             </li>
             </ul>
+            </div>
         {% endfor %}
-    <a href="{% url 'create_task' board.id %}">Create a new task</a>
+       </div>
     </body>
+</html>
