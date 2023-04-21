@@ -13,13 +13,13 @@
                 <h3>Edit a task</h3>
                  <label for="title"></label>
                   <input type="text" name="title" required value="{{ task.title }}"><br><br>
-
-                  <label for="description"></label>
-                    <textarea name="description" required placeholder="{{ task.description }}"></textarea><br><br>
-
+                    <div class="desc-container">
+                      <label for="description">Description</label><br>
+                        <textarea id="dsc-input" name="description">{{ task.description }}</textarea>
+                        <br><br>
+                    </div>
                     <label for="deadline"></label>
-                  <input type="datetime-local" name="deadline" value="{{ task.deadline }}" required><br><br>
-
+                  <input type="datetime-local" name="deadline" value="{{ deadline }}" required><br><br>
                     <select name="priority" required>
                     <option value="">{{ task.priority }}</option>
                     {% for priority_choice in priority_choices %}
@@ -27,8 +27,8 @@
                     {% endfor %}
                   </select>
 
-                  <select name="column" required>
-                    <option value="">{{ task_column.title }}</option>
+                  <select name="column">
+                    <option value="{{ task_column.id }}" selected>{{ task_column.title }}</option>
                     {% for column in columns %}
                     <option value="{{ column.id }}">{{ column.title }}</option>
                     {% endfor %}
