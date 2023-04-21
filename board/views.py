@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -48,22 +50,43 @@ def create_task(request, board_id):
     return render(request, 'create_new_task.html', context)
 
 
-def choose_board(request):
-    return HttpResponse("You're choosing a board")
+def add_column(request, board_id):
+    board_title = get_object_or_404(Board, pk=board_id).title
+    context = {
+        'board_id': board_id,
+        'board_title': board_title,
+    }
+    if request.method == 'POST':
+        title = request.POST.get('column_title')
+        column = Column(title=title, board_id=board_id)
+        column.save()
+        return redirect('view_board', board_id)
+    return render(request, 'add_column.html', context)
 
 
 def edit_task(request, board_id, task_id):
     task = get_object_or_404(Task, pk=task_id)
     task_column = get_object_or_404(Column, pk=task.column_id)
     columns = Column.objects.filter(board_id=board_id)
+    priority_choices = Task.Priority.choices
+    deadline_time = task.deadline
+    deadline = deadline_time.strftime('%Y-%m-%dT%H:%M')
     context = {
         'task': task,
         'board_id': board_id,
         'task_id': task_id,
         'task_column': task_column,
         'columns': columns,
+        'priority_choices': priority_choices,
+        'deadline': deadline,
     }
     if request.method == 'POST':
-        update_task_db(request)
+        task.id = task_id
+        task.title = request.POST.get('title')
+        task.description = request.POST.get('description')
+        task.column_id = request.POST.get('column')
+        task.deadline = request.POST.get('deadline')
+        task.priority = request.POST.get('priority')
+        task.save()
         return redirect('view_board', board_id)
     return render(request, 'edit_task.html', context)
