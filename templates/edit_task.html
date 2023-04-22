@@ -11,19 +11,21 @@
         <form class="form-edit" action="{% url 'edit_task' board_id task_id %}" method="post">
             {% csrf_token %}
                 <h3>Edit a task</h3>
-                 <label for="title"></label>
+                 <label for="title">Title</label><br>
                   <input type="text" name="title" required value="{{ task.title }}"><br><br>
                     <div class="desc-container">
                       <label for="description">Description</label><br>
                         <textarea id="dsc-input" name="description">{{ task.description }}</textarea>
                         <br><br>
                     </div>
-                    <label for="deadline"></label>
+                    <label for="deadline">Deadline</label><br>
                   <input type="datetime-local" name="deadline" value="{{ deadline }}" required><br><br>
                     <select name="priority" required>
-                    <option value="">{{ task.priority }}</option>
+                    <option value="{{ task.priority }}" selected>{{ task.priority }}</option>
                     {% for priority_choice in priority_choices %}
+                        {% if priority_choice != task.priority %}
                     <option value="{{ priority_choice }}">{{ priority_choice }}</option>
+                        {% endif %}
                     {% endfor %}
                   </select>
 
@@ -33,9 +35,11 @@
                     <option value="{{ column.id }}">{{ column.title }}</option>
                     {% endfor %}
                   </select><br><br>
-                <div id="edit-btn">
-                <button type="submit">OK</button>
+                <div id="edit-task-btn">
+                <input type="submit" name="edit" value="Save">
+                    <input type="submit" name="delete" value="Delete this task">
                 </div>
+
         </form>
 </div>
 </body>

@@ -8,7 +8,7 @@ class Board(models.Model):
 
 class Column(models.Model):
     title = models.CharField(max_length=100)
-    board = models.ForeignKey(Board, on_delete=models.DO_NOTHING)
+    board = models.ForeignKey(Board, on_delete=models.CASCADE)
 
 
 class Task(models.Model):
@@ -21,6 +21,6 @@ class Task(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField()
     priority = models.CharField(max_length=6, choices=Priority.choices, default=Priority.medium)
-    column = models.ForeignKey(Column, on_delete=models.DO_NOTHING)
+    column = models.ForeignKey(Column, on_delete=models.CASCADE)
 
 
