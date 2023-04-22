@@ -1,12 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <meta charset="utf-8" />
-    <title>Edit a task</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 <div class="edit-container">
         <form class="form-edit" action="{% url 'edit_task' board_id task_id %}" method="post">
             {% csrf_token %}
@@ -42,4 +35,4 @@
 
         </form>
 </div>
-</body>
+{% endblock %}

@@ -1,14 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en-US">
-<script src="{% static 'js/script.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
-  <head>
-    <meta charset="utf-8" />
-    <title>Home page</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
+{% block content %}
   <div class="ind-container">
       <div class="boards-container">
         <h2>Choose a board</h2>
@@ -23,5 +14,4 @@
           <div id="time"></div>
         </div>
   </div>
-  </body>
-</html>
+{% endblock %}

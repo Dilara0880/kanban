@@ -1,12 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-        <meta charset="utf-8" />
-        <title>{{ board.title }}</title>
-    </head>
-    <body>
+{% extends 'base.html' %}
+{% block content %}
         <h3>{{ board.title }}</h3>
         <a href="{% url 'index' %}">Home</a>
         <a href="{% url 'create_task' board.id %}">Create a task</a>
@@ -36,5 +29,4 @@
             </div>
         {% endfor %}
        </div>
-    </body>
-</html>
+{% endblock %}
