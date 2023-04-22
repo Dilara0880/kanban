@@ -27,6 +27,9 @@ def view_board(request, board_id):
     board = get_object_or_404(Board, pk=board_id)
     columns = Column.objects.filter(board_id=board_id)
     tasks = set()
+    if request.POST.get('delete'):
+        Board.objects.filter(pk=board_id).delete()
+        return redirect('index')
     for column in columns:
         tasks.add(Task.objects.filter(column_id=column.id))
     context = {
@@ -34,6 +37,7 @@ def view_board(request, board_id):
         'columns': columns,
         'tasks': tasks,
     }
+
     return render(request, 'view_board.html', context)
 
 
@@ -80,7 +84,7 @@ def edit_task(request, board_id, task_id):
         'priority_choices': priority_choices,
         'deadline': deadline,
     }
-    if request.method == 'POST':
+    if request.POST.get('edit'):
         task.id = task_id
         task.title = request.POST.get('title')
         task.description = request.POST.get('description')
@@ -89,4 +93,23 @@ def edit_task(request, board_id, task_id):
         task.priority = request.POST.get('priority')
         task.save()
         return redirect('view_board', board_id)
+    if request.POST.get('delete'):
+        Task.objects.filter(pk=task_id).delete()
+        return redirect('view_board', board_id)
     return render(request, 'edit_task.html', context)
+
+
+def add_board(request):
+    if request.method == 'POST':
+        board_id = Board.objects.order_by('-id').first().id + 1
+        board_title = request.POST.get('board_title')
+        board = Board(id=board_id, title=board_title)
+        board.save()
+        columns = request.POST.get('columns')
+        columns = columns.split(',')
+        print(columns)
+        for column in columns:
+            column_model = Column(title=column.strip(), board_id=board_id)
+            column_model.save()
+        return redirect('index')
+    return render(request, 'add_board.html')

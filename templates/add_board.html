@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <meta charset="utf-8" />
+    <title>Add a board</title>
+</head>
+<body>
+<h3>Add a board</h3>
+    <div class="board-container">
+        <form class="board-form" action="{% url 'add_board' %}" method="post">
+            {% csrf_token %}
+            <label for="board_title">Board title</label>
+            <input name="board_title" required> <br><br>
+            <label for="columns">Columns</label>
+            <textarea name="columns" required placeholder="Enter columns' titles separated by comma"></textarea>
+            <button type="submit">OK</button>
+        </form>
+    </div>
+</body>
+</html>
