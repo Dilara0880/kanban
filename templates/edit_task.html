@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="edit-container">
+<div class="form-container">
         <form class="form-edit" action="{% url 'edit_task' board_id task_id %}" method="post">
             {% csrf_token %}
                 <h3>Edit a task</h3>
@@ -32,7 +32,6 @@
                 <input type="submit" name="edit" value="Save">
                     <input type="submit" name="delete" value="Delete this task">
                 </div>
-
         </form>
 </div>
 {% endblock %}

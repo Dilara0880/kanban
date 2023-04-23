@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div class="form-container">
         <form class="form" action="{% url 'create_task' board_id %}" method="post">
             {% csrf_token %}
                 <h3>Creating a new task</h3>
@@ -28,4 +29,5 @@
 
                 <button type="submit">OK</button>
         </form>
+    </div>
 {% endblock %}

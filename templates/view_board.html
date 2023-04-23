@@ -3,11 +3,11 @@
         <h3>{{ board.title }}</h3>
         <a href="{% url 'index' %}">Home</a>
         <a href="{% url 'create_task' board.id %}">Create a task</a>
-        <a href="{% url 'add_column' board.id %}">Add a column</a>
+        <a href="{% url 'add_column' board.id %}">Add a column</a><br><br>
         <form class="dlt-board-form" method="post">
             {% csrf_token %}
             <input type="submit" name="delete" value="Delete this board">
-        </form>
+        </form> <br>
         <div class="col-section">
         {% for column in columns %}
             <div class="col-wrapper">
