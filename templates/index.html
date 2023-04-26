@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
   <div class="ind-container">
-      <div class="boards-container">
-        <h2>Choose a board</h2>
+      <h2>Choose a board</h2>
+    <div class="boards-container">
+      <div class="board-lnk">
           <a href="{% url 'add_board' %}">Add new board</a>
-          {% for board in boards %}
+       </div>
+        {% for board in boards %}
+            <div class="board-lnk">
           <a href="{% url 'view_board' board.id %}" >{{ board.title }}</a>
-          {% endfor %}
         </div>
+          {% endfor %}
+    </div>
+
       <div class="time-container">
         <h3>Current date and time</h3>
           <div id="date"></div>

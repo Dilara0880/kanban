@@ -59,9 +59,39 @@ a{
 }
 
 .ind-container {
+  margin: 0 auto;
   position: relative;
-  width: 100%;
+  width: 60%;
   height: 100vh;
+}
+
+.ind-container h2{
+  padding-top: 30px;
+  margin: 50px 40%;
+}
+
+.boards-container{
+  margin: 10px 50px;
+  height: 300px;
+  display: flex;
+  padding-top: 0;
+}
+
+.boards-container a{
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.board-lnk{
+  flex: 1;
+  text-align: left;
+  border-radius: 3px;
+  background-color: #bbdcfa;
+  width: 40px;
+  height: 100px;
+  margin: 10px;
 }
 
 .time-container{
