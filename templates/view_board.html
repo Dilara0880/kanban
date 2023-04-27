@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
         <h3>{{ board.title }}</h3>
-        <a href="{% url 'index' %}">Home</a>
+
         <a href="{% url 'create_task' board.id %}">Create a task</a>
         <a href="{% url 'add_column' board.id %}">Add a column</a><br><br>
         <form class="dlt-board-form" method="post">

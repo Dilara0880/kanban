@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
   <div class="ind-container">
-      <h2>Choose a board</h2>
     <div class="boards-container">
       <div class="board-lnk">
-          <a href="{% url 'add_board' %}">Add new board</a>
+          <a href="{% url 'add_board' %}">+board</a>
        </div>
         {% for board in boards %}
             <div class="board-lnk">
@@ -13,10 +12,6 @@
           {% endfor %}
     </div>
 
-      <div class="time-container">
-        <h3>Current date and time</h3>
-          <div id="date"></div>
-          <div id="time"></div>
-        </div>
+
   </div>
 {% endblock %}
