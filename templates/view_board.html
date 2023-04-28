@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
         <h3>{{ board.title }}</h3>
-
-        <a href="{% url 'create_task' board.id %}">Create a task</a>
-        <a href="{% url 'add_column' board.id %}">Add a column</a><br><br>
         <form class="dlt-board-form" method="post">
             {% csrf_token %}
             <input type="submit" name="delete" value="Delete this board">
@@ -23,10 +20,14 @@
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
+                       <div class="add-task-lnk">
+                           <a href="{% url 'create_task' board.id %}">+ Add a card</a>
+                       </div>
                   </div>
             </li>
             </ul>
             </div>
         {% endfor %}
+        <div class="col-wrapper"><a href="{% url 'add_column' board.id %}"> + Add another column</a><br><br></div>
        </div>
 {% endblock %}
