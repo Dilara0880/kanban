@@ -43,7 +43,7 @@ def view_board(request, board_id):
 
 def create_task(request, board_id):
     columns = Column.objects.filter(board_id=board_id)
-    priority_choices = Task.Priority.choices
+    priority_choices = ['Easy', 'Medium', 'Hard']
     context = {'columns': columns,
                'board_id': board_id,
                'priority_choices': priority_choices,
@@ -72,7 +72,7 @@ def edit_task(request, board_id, task_id):
     task = get_object_or_404(Task, pk=task_id)
     task_column = get_object_or_404(Column, pk=task.column_id)
     columns = Column.objects.filter(board_id=board_id)
-    priority_choices = Task.Priority.choices
+    priority_choices = ['Easy', 'Medium', 'Hard']
     deadline_time = task.deadline
     deadline = deadline_time.strftime('%Y-%m-%dT%H:%M')
     context = {

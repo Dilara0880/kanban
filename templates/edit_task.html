@@ -25,7 +25,9 @@
                   <select name="column">
                     <option value="{{ task_column.id }}" selected>{{ task_column.title }}</option>
                     {% for column in columns %}
+                        {% if column.id != task_column.id %}
                     <option value="{{ column.id }}">{{ column.title }}</option>
+                        {% endif %}
                     {% endfor %}
                   </select><br><br>
                 <div id="edit-task-btn">
