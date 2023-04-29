@@ -3,7 +3,7 @@
         <h3>{{ board.title }}</h3>
         <form class="dlt-board-form" method="post">
             {% csrf_token %}
-            <input type="submit" name="delete" value="Delete this board">
+            <input id="dlt-board-btn" type="submit" name="delete" value="Delete this board">
         </form> <br>
         <div class="col-section">
         {% for column in columns %}

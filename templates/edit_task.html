@@ -4,7 +4,9 @@
         <form class="form-edit" action="{% url 'edit_task' board_id task_id %}" method="post">
             {% csrf_token %}
                 <h3>Edit a task</h3>
-                 <label for="title">Title</label><br>
+                 <label for="title">Title</label>
+
+
                   <input type="text" name="title" required value="{{ task.title }}"><br><br>
                     <div class="desc-container">
                       <label for="description">Description</label><br>
@@ -30,10 +32,10 @@
                         {% endif %}
                     {% endfor %}
                   </select><br><br>
-                <div id="edit-task-btn">
-                <input type="submit" name="edit" value="Save">
-                    <input type="submit" name="delete" value="Delete this task">
-                </div>
+            <div class="task-edit-cont">
+                <input id="task-save-btn" type="submit" name="edit" value="Save">
+               <input id="task-dlt-btn" type="submit" name="delete" value="Delete this task"><br>
+            </div>
         </form>
 </div>
 {% endblock %}
