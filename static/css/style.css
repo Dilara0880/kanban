@@ -116,14 +116,18 @@ a{
   color: darkblue;
 }
 .time-container{
-  flex: 1;
-  width: 30px;
-  height: 55px;
+  flex: 0.15;
+  width: 10%;
+  height: 15%;
   color: #d8dee5;
+  font-weight: lighter;
+  text-align: right;
 }
 
 .time-container h4{
-  text-align: right;
+  text-align: left;
+    font-size: 14px;
+
 }
 
 button{

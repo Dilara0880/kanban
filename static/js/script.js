@@ -1,15 +1,22 @@
 function updateTime() {
+  function addLeadingZero(number) {
+  if (number < 10) {
+    return "0" + number;
+  }
+  return number;
+}
+
   var now = new Date();
   var months = [
     "января", "февраля", "марта", "апреля", "мая", "июня",
     "июля", "августа", "сентября", "октября", "ноября", "декабря"
   ];
-  var month = months[now.getMonth()];
+  const month = months[now.getMonth()];
   var date = now.getDate();
   var year = now.getFullYear();
-  var hours = now.getHours();
-  var minutes = now.getMinutes();
-  var seconds = now.getSeconds();
+  var hours = addLeadingZero(now.getHours());
+  var minutes = addLeadingZero(now.getMinutes());
+  var seconds = addLeadingZero(now.getSeconds());
 
   // format date
   var dateString = date + " " + month + " " + year;
