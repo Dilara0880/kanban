@@ -21,7 +21,7 @@
                             {% endfor %}
                         {% endfor %}
                        <div class="add-task-lnk">
-                           <a href="{% url 'create_task' board.id %}">+ Add a card</a>
+                           <a href="{% url 'create_task' board.id column.id %}">+ Add a card</a>
                        </div>
                   </div>
             </li>

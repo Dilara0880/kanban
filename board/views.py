@@ -6,15 +6,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from board.models import Board, Column, Task
 
 
-def update_task_db(request):
-    title = request.POST.get('title')
-    description = request.POST.get('description')
-    column_id = request.POST.get('column')
-    deadline = request.POST.get('deadline')
-    priority = request.POST.get('priority')
-    task = Task(title=title, description=description, column_id=column_id, deadline=deadline, priority=priority)
-    task.save()
-
 
 def index(request):
     context = {
@@ -41,15 +32,20 @@ def view_board(request, board_id):
     return render(request, 'view_board.html', context)
 
 
-def create_task(request, board_id):
-    columns = Column.objects.filter(board_id=board_id)
+def create_task(request, board_id, column_id):
+    column = get_object_or_404(Column, pk=column_id)
     priority_choices = ['Easy', 'Medium', 'Hard']
-    context = {'columns': columns,
+    context = {'column': column,
                'board_id': board_id,
                'priority_choices': priority_choices,
                }
     if request.method == 'POST':
-        update_task_db(request)
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        deadline = request.POST.get('deadline')
+        priority = request.POST.get('priority')
+        task = Task(title=title, description=description, column_id=column_id, deadline=deadline, priority=priority)
+        task.save()
         return redirect('view_board', board_id)
     return render(request, 'create_new_task.html', context)
 
@@ -107,7 +103,6 @@ def add_board(request):
         board.save()
         columns = request.POST.get('columns')
         columns = columns.split(',')
-        print(columns)
         for column in columns:
             column_model = Column(title=column.strip(), board_id=board_id)
             column_model.save()
