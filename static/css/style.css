@@ -134,6 +134,11 @@ h3{
   padding-top: 0;
 }
 
+.task:active {
+    border: 3px solid black;
+
+}
+
 /**************************/
 
 

@@ -7,14 +7,15 @@
         </form> <br>
         <div class="col-section">
         {% for column in columns %}
-            <div class="col-wrapper">
-            <ul class="container">
+            <div class="col-wrapper" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <ul id="col-{{ column.id }}" class="container">
             <li class="hr">{{ column.title }}
-                   <div class="task-wrapper">
+                   <div class="task-wrapper" >
                        {% for task_set in tasks %}
                            {% for task in task_set %}
                                {% if task.column_id == column.id %}
-                                <div class="task">
+                                <div class="task" draggable="true" data-task-id="{{ task.id }}"
+                                ondragstart="handleDragStart(event)">
                                 <a class="task-title" href="{% url 'edit_task' board.id task.id  %}">{{ task.title }}</a>
                                 </div>
                                 {% endif %}
